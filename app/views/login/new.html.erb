@@ -1,0 +1,20 @@
+<div class="middle-box text-center loginscreen animated fadeInDown">
+    <div>
+        <div>
+            <hr>
+            <h2 class="">Post
+             Panel</h2><hr>
+
+        </div>   
+            <%= form_for :admin,url:login_path, :html=>{:class=>"form-horizontal"} do |form| %>
+            <div class="form-group">
+                <input type="email" class="form-control" placeholder="Email" name="email">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+            </div>
+            
+            <input type="submit" value ="Login" class="btn btn-primary block full-width m-b" style="background-color: #c40000 !important;border: 1px solid #c40000 !important;" > <span class="form-inline"><a href="<%=registration_path%>"><span class="btn btn-primary btn-xs"><b>Registration </b></span>
+            <%end%>
+    </div>
+</div>

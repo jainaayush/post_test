@@ -1,0 +1,70 @@
+  <%=form_for :notification,url: create_post_path,:html=>{id: "add-notification-form",:class=>"form-horizontal",:multipart => true} do |f|%> 
+
+ <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <label> Write any thing</label> 
+                <textarea name="post" class="form-control" minlength="1" maxlength="255" rows="5" id="description" placeholder="Enter description"></textarea>
+                 <div id="theCount">
+                  <span id="current1"></span>
+                  <span id="maximum"></span>
+                </div>
+              </div>  
+            </div>
+            <div class="col-lg-2">
+                <div class="form-group" style="margin-top: 20px;">
+                <select name="status" class="form-control" id="filter" style="height: 37px">
+                   <option value="private">private</option>
+                  <option value="public">Public</option>
+                  
+                  
+                </select>
+              </div>
+            </div>
+                 <div class="col-lg-10">
+              <input type="submit" name="Send" value="Share" class="btn btn-md btn-primary pull-right" id="add-notification" > 
+            </div><br>
+            <%end%><br>
+            <hr><hr>
+            <%#=form_for :notification,url: posts_path,:html=>{id: "add-notification-form",:class=>"form-horizontal",:multipart => true} do |f|%> 
+           <a href="<%=private_post_path(status:"private")%>"><span class="btn btn-primary btn-sm" style="display: inherit;"> Private Post</span></a>
+           <a href="<%=private_post_path(status:"public")%>"><span class="btn btn-primary btn-sm" style="display: inherit;"> Public Post</span></a>
+                 <<br>
+            <%#end%><br>
+
+<div class="tab-pane" id="tab-1">
+    <% @post.each do |a| %>
+    <div class="feed-activity-list" style="margin-bottom: 5px">
+        <div class="feed-element">
+            <div class="media-body ">
+                <small class="float-right"><%=time_ago_in_words(a.created_at)%>   ago</small>
+                
+                <%=a.post%><br>
+                <small class="text-muted"><%=a.created_at.to_formatted_s(:long_ordinal)%></small><br>
+                <% if a.user_id == @user.id%>
+                <span class="form-inline"><a href="<%=edit_path(id:a.id)%>"><span class="btn btn-primary btn-xs"><b>edit </b></span></a>  &nbsp; 
+                  <span class="form-inline"><a href="<%=destroy_path(id:a.id)%>"><span class="btn btn-primary btn-xs"><b>delete </b></span></a>   
+                  <%end%>
+                </div>  
+            </div>                                                         
+    </div>
+    <%end%>
+</div>
+<script type="text/javascript">
+     $("#description").keyup(function(){
+
+     var characterCount = $(this).val().length,
+      current1 = $('#current1'),
+      maximum = $('#maximum'),
+      theCount = $('#the-count');
+  
+      current1.text(characterCount);
+  });
+
+     $('#status-val').on("change", function(){
+    var status = $(this).val()
+    var link = $(this).attr("attr-link")
+    var npath = link.split('status=')[0]
+    // window.location = npath+"?status="+status
+    window.location = npath=="<%= posts_path%>" ? npath+"?status="+status : npath+"status="+status
+  })
+</script>

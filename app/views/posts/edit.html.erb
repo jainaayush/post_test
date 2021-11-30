@@ -1,0 +1,16 @@
+ <%=form_for :notification,url: update_path(id:@post.id),:html=>{id: "add-notification-form",:class=>"form-horizontal",:multipart => true} do |f|%> 
+
+ <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12">
+                <label> Write any thing</label> 
+                <input name="post" class="form-control" minlength="1" maxlength="255" rows="5" id="description" value="<%=@post.post%>" placeholder="Enter description"></input>
+                 <div id="theCount">
+                  <span id="current1"></span>
+                  <span id="maximum"></span>
+                </div>
+              </div>  
+            </div>
+                 <div class="col-lg-12">
+              <input type="submit" name="Send" value="Share" class="btn btn-md btn-primary pull-right" id="add-notification" > 
+            </div><br>
+            <%end%><br>
